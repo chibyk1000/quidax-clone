@@ -1,11 +1,76 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-
+import { useState, useEffect } from 'react';
+import {TableContainer, Table,TableCell, TableHead, TableRow, TableBody, Paper} from "@mui/material";
+import Hero from 'components/Hero'
+import HeroSlider from 'components/HeroSlider'
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SearchIcon from "@mui/icons-material/Search";
+import Navbar from 'components/Navbar'
+import { GetServerSideProps, InferGetServerSidePropsType} from "next";
+import Link from 'next/link';
+import  Footer from '../../components/Footer'
 const inter = Inter({ subsets: ['latin'] })
+interface Coin{
+  name: string;
+  code: string;
+  png32: string; 
+  png64: string;
+  delta: {
+    day: number;
+    hour: number;
+    week: number;
+    month: number;
+    year: number;
+    quarter: number;
+  }
+  rate: number;
 
-export default function Home() {
+} 
+export const  getServerSideProps:GetServerSideProps = async() => {
+  // Fetch data from external API
+  const res = await fetch(`https://api.livecoinwatch.com/coins/list`, {
+    method: "POST",
+    headers: new Headers({
+      "content-type": "application/json",
+      "x-api-key": process.env.LIVECOIN_API_KEY as string,
+    }),
+    body: JSON.stringify({
+      currency: "USDT",
+      sort: "rank",
+      order: "ascending",
+      offset: 0,
+      // limit: 10,
+      meta: true,
+    }),
+  });
+  const data = await res.json();
+
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
+type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+export default function Home({ data }: PageProps) {
+  const [limit, setLimit] = useState(10)
+  const [index, setIndex] = useState(0)
+  const [btn, setBtn] = useState('btn1')
+
+const output= []
+  
+  if (data) {
+    
+    for (let i = index; i < limit; i++) {
+     output.push(data[i]);
+      
+    }
+  }
+  
+  
+  
   return (
     <>
       <Head>
@@ -14,110 +79,167 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
+
+      <>
+        <Navbar />
+        <Hero />
+        <HeroSlider />
+
+        <div className="md:w-[90%] mx-auto ">
+          <div className="flex justify-between px-4 my-5 items-center">
+            <ul className="text-primary flex gap-4">
+              <li>
+                {" "}
+                <Link href="" className="font-bold">
+                  Spot
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link href="" className="font-bold">
+                  Newly listed
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link href="" className="font-bold">
+                  Top Gainers
+                </Link>
+              </li>
+            </ul>
+
+            <form className="bg-primary/5 flex w-[18rem] justify-between items-center pr-2 rounded-md">
+              <input
+                type="text"
+                placeholder="Search for crypto "
+                className="focus:outline-none bg-transparent pl-3 text-[1.1rem] py-3"
               />
-            </a>
+              <SearchIcon className="text-primary/20" />
+            </form>
+          </div>
+          <TableContainer component={Paper} className="rounded-xl">
+            <Table>
+              <TableHead className="bg-primary/5">
+                <TableRow>
+                  <TableCell align="left" className="font-bold">
+                    NAME
+                  </TableCell>
+                  <TableCell align="left" className="font-bold">
+                    COIN PAIR
+                  </TableCell>
+                  <TableCell align="left" className="font-bold">
+                    LAST PRICE
+                  </TableCell>
+
+                  <TableCell align="left" className="font-bold">
+                    24h Change
+                  </TableCell>
+
+                  <TableCell align="left" className="font-bold">
+                    TRADE
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {output.map((coin: Coin) => (
+                  <TableRow key={coin.name} className="hover:bg-primary/5">
+                    <TableCell className="flex items-center gap-5">
+                      <Image
+                        src={coin.png64}
+                        width={50}
+                        height={50}
+                        alt={coin.name}
+                      />{" "}
+                      <div className="flex items-center gap-2">
+                        <p className="font-bold text-xl  text-primary">
+                          {coin.code}
+                        </p>
+                        <p className="text-primary text-lg">{coin.name}</p>
+                      </div>{" "}
+                    </TableCell>
+                    <TableCell className="font-bold text-2xl">/USD</TableCell>
+                    <TableCell className="font-bold text-xl">
+                      USD {coin.rate.toFixed(2)}
+                    </TableCell>
+                    <TableCell
+                      className={`font-bold text-[1.1rem] ${
+                        coin.delta.day < 0 ? "text-red-600" : "text-green-700"
+                      }`}
+                    >
+                      {coin.delta.day > 0 ? (
+                        <ArrowDropUpIcon color="success" />
+                      ) : (
+                        <ArrowDropDownIcon color="error" />
+                      )}{" "}
+                      {coin.delta.day.toFixed(2)} %
+                    </TableCell>
+                    <TableCell>
+                      <button className="bg-primary hover:bg-green-600 w-20 h-10 rounded-full text-white capitalize">
+                        buy
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <div className="h-5 my-16">
+            <button
+              className={`w-16 rounded-md  h-16 border mx-2 ${
+                btn === "btn1" ? "bg-primary text-white" : ""
+              }`}
+              onClick={() => {
+                setLimit(10);
+                setIndex(0);
+                setBtn("btn1");
+              }}
+            >
+              1
+            </button>
+            <button
+              className={`w-16 rounded-md  h-16 border mx-2 ${
+                btn === "btn2" ? "bg-primary text-white" : ""
+              }`}
+              onClick={() => {
+                setLimit(20);
+                setIndex(10);
+                setBtn("btn2");
+              }}
+            >
+              2
+            </button>
+            <button
+              className={`w-16 rounded-md  h-16 border mx-21 ${
+                btn === "btn3" ? "bg-primary text-white" : ""
+              }`}
+              onClick={() => {
+                setLimit(30);
+                setIndex(20);
+                setBtn("btn3");
+              }}
+            >
+              3
+            </button>
+            <button
+              className={`w-16 rounded-md  h-16 border mx-2 ${
+                btn === "btn4" ? "bg-primary text-white" : ""
+              }`}
+              onClick={() => {
+                setLimit(40);
+                setIndex(30);
+                setBtn("btn4");
+              }}
+            >
+              4
+            </button>
           </div>
         </div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
+        <Footer/>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+ 
+      </>
     </>
-  )
+  );
 }
