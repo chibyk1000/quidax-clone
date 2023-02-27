@@ -5,8 +5,8 @@ import List from './List';
 const Footer = () => {
     return (
       <section className="bg-primary text-white  min-h-screen p-20  ">
-        <div className="flex justify-between w-90 mx-auto">
-          <div>
+        <div className="flex max-lg:flex-wrap justify-between w-90 mx-auto">
+          <div className="max-lg:w-full max-lg:mb-10">
             <Image
               src="/images/quidax_logo_white.svg"
               width={100}
@@ -31,7 +31,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div>
+          <div className="max-lg:my-20 max-md:w-[50%]">
             <header className="text-xl font-bold mb-10">Products</header>
             <List
               list={[
@@ -46,23 +46,23 @@ const Footer = () => {
               ]}
             />
           </div>
-          <div>
+          <div className="max-lg:my-20 max-md:w-[50%]">
             <header className="text-xl font-bold mb-10">Learn</header>
             <List
               list={[" Buy Crypto", "Buy Bitcoin in Nigeria", "Buy USDT"]}
             />
           </div>
-          <div>
+          <div className="max-lg:my-20 max-md:w-[50%]">
             <header className="text-xl font-bold mb-10">Resources</header>
             <List
               list={["FAQs", "Quidax Support", "Quidax Blog", "Quidax Academy"]}
             />
           </div>
-          <div>
+          <div className="max-lg:w-[40%] max-lg:my-20 max-md:w-[50%]">
             <header className="text-xl font-bold mb-10">Company</header>
             <List list={["About Us", "Careers"]} />
           </div>
-          <div>
+          <div className="max-lg:w-[40%] max-lg:my-20 max-md:w-[50%]">
             <header className="text-xl font-bold mb-10">Legal</header>
             <List list={["Privacy Policy", "Terms of Use"]} />
           </div>

@@ -4,26 +4,30 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <section className="min-h-screen grid pt-40 pb-5">
-      <div className="lg:grid grid-cols-2 w-[90%] mx-auto  gap-20">
+    <section className="h-[] grid pt-40 pb-10">
+      <div className="grid lg:grid-cols-2   grid-cols-1  w-[90%] mx-auto  gap-40">
         <div className="">
-          <h2 className="max-lg:text-center text-6xl font-bold text-primary leading-[5rem]">
-            Buy and sell <br /> crypto with ease
+          <h2 className="max-lg:text-center max-md:text-4xl text-6xl font-bold text-primary leading-[5rem]">
+            Buy and sell crypto with ease
           </h2>
-          <p className="text-primary my-10 leading-[2rem] font-semibold">
-            Quidax makes it simple to buy and sell cryptocurrency. <br /> Join
-            the squad and get started today.
+          <div className='my-10 w-fit max-lg:mx-auto max-md:text-[.8rem]'>
+
+          <p className="text-primary max-lg:text-center  max-lg:inline leading-[2rem] font-semibold max-md:mr-2">
+            Quidax makes it simple to buy and sell cryptocurrency.
           </p>
+          <p className="text-primary max-lg:text-center  max-lg:inline leading-[2rem] font-semibold">
+            Join the squad and get started today.
+          </p>
+          </div>
           <Link
             href="/"
-            className="bg-primary text-white py-3 px-10 rounded-lg hover:bg-green-600"
+            className="bg-primary max-lg:mx-auto text-white block text-center md:w-fit py-3 px-10 rounded-lg hover:bg-green-600"
           >
             Join the Squad
           </Link>
-          <p className='text-primary my-8 font-semibold'>DOWNLOAD ON</p>
+          <p className="text-primary my-8 font-semibold max-md:text-[.8rem]">DOWNLOAD ON</p>
           <div className="text-secondary flex items-center gap-5">
-             
-            <div  className='flex items-center gap-3 font-semibold'>
+            <div className="flex items-center gap-3 font-semibold">
               <svg
                 width="1em"
                 height="1em"
@@ -36,7 +40,7 @@ const Hero = () => {
               </svg>
               PlayStore
             </div>
-            <div className='flex items-center gap-3 font-semibold'>
+            <div className="flex items-center gap-3 font-semibold">
               <svg
                 width="1em"
                 height="1em"
@@ -51,12 +55,14 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="max-md:hidden">
           <Image
             src="/images/hero_img.png"
             alt="hero image"
+            className='mx-auto max-lg:w-[20rem]'
             width={500}
             height={100}
+            
           />
         </div>
       </div>

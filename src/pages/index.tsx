@@ -85,7 +85,7 @@ const output= []
         <Hero />
         <HeroSlider />
 
-        <div className="md:w-[90%] mx-auto ">
+        <div className="w-[90%] mx-auto ">
           <div className="flex justify-between px-4 my-5 items-center">
             <ul className="text-primary flex gap-4">
               <li>
@@ -124,18 +124,18 @@ const output= []
                   <TableCell align="left" className="font-bold">
                     NAME
                   </TableCell>
-                  <TableCell align="left" className="font-bold">
+                  <TableCell align="left" className="font-bold max-lg:hidden">
                     COIN PAIR
                   </TableCell>
-                  <TableCell align="left" className="font-bold">
+                  <TableCell align="left" className="font-bold ">
                     LAST PRICE
                   </TableCell>
 
-                  <TableCell align="left" className="font-bold">
+                  <TableCell align="left" className="font-bold max-md:hidden">
                     24h Change
                   </TableCell>
 
-                  <TableCell align="left" className="font-bold">
+                  <TableCell align="left" className="font-bold max-lg:hidden">
                     TRADE
                   </TableCell>
                 </TableRow>
@@ -157,12 +157,27 @@ const output= []
                         <p className="text-primary text-lg">{coin.name}</p>
                       </div>{" "}
                     </TableCell>
-                    <TableCell className="font-bold text-2xl">/USD</TableCell>
-                    <TableCell className="font-bold text-xl">
+                    <TableCell className="font-semibold text-xl max-lg:hidden">
+                      /USD
+                    </TableCell>
+                    <TableCell className="lg:font-semi  lg:text-xl">
                       USD {coin.rate.toFixed(2)}
+                      <p
+                        className={`font-bold text-[1.1rem] md:hidden  ${
+                          coin.delta.day < 0 ? "text-red-600" : "text-green-700"
+                        }`}
+                      >
+                        {" "}
+                        {coin.delta.day > 0 ? (
+                          <ArrowDropUpIcon color="success" />
+                        ) : (
+                          <ArrowDropDownIcon color="error" />
+                        )}{" "}
+                        {coin.delta.day.toFixed(2)} %
+                      </p>
                     </TableCell>
                     <TableCell
-                      className={`font-bold text-[1.1rem] ${
+                      className={`font-bold text-[1.1rem] max-md:hidden  ${
                         coin.delta.day < 0 ? "text-red-600" : "text-green-700"
                       }`}
                     >
@@ -173,7 +188,7 @@ const output= []
                       )}{" "}
                       {coin.delta.day.toFixed(2)} %
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="max-lg:hidden">
                       <button className="bg-primary hover:bg-green-600 w-20 h-10 rounded-full text-white capitalize">
                         buy
                       </button>
@@ -236,9 +251,7 @@ const output= []
           </div>
         </div>
 
-        <Footer/>
-
- 
+        <Footer />
       </>
     </>
   );
