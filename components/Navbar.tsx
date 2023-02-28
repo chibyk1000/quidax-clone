@@ -41,7 +41,7 @@ const Navbar = () => {
             Sign In
           </Link>
           <Link
-            href=""
+            href="/signup"
             className={`bg-primary text-white py-3 max-lg:w-60 px-10 rounded-lg hover:bg-green-600`}
           >
             Get started
@@ -50,7 +50,7 @@ const Navbar = () => {
       </div>
       <div className="max-lg:flex hidden font-semibold lg:w-[35%] gap-5 justify-between items-center ">
         <Link
-          href=""
+          href="/signup"
           className={`bg-primary text-white py-3 px-10 rounded-lg hover:bg-green-600 ${
             collapse ? "" : "hidden"
           }`}
