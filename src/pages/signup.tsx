@@ -61,7 +61,7 @@ const [show,setShow] = useState(false)
         <div className=''>
           <form
             action=""
-            className="bg-white  w-1/2 mx-auto  text-primary p-10 "
+            className="bg-white w-4/5  lg:w-1/2 mx-auto  text-primary p-10 "
           >
             <Image
               src="/images/avatar-neutral-add-2.png"
@@ -170,7 +170,7 @@ const [show,setShow] = useState(false)
                   <input
                     type="tel"
                     placeholder="(201) 555-0123"
-                    className="block focus:outline-none ml-16 placeholder:text-primary/70   pl-2 w-full  rounded mt-3"
+                    className="block focus:outline-none ml-16 placeholder:text-primary/70  h-8 pl-2 w-full  rounded mt-3"
                   />
                 </div>
               </div>

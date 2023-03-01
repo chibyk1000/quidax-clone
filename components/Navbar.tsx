@@ -24,7 +24,7 @@ const Navbar = () => {
           collapse ? "max-lg:hidden" : "lg:flex"
         } `}
       >
-        <ul className=" flex max-lg:flex-col  w-1/3 justify-between font-semibold max-lg:gap-5">
+        <ul className=" flex max-lg:flex-col   w-1/3 justify-between font-semibold max-lg:gap-5">
           <li>
             <Link href="">Product</Link>
           </li>
