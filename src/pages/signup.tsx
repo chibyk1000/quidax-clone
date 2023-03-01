@@ -55,10 +55,9 @@ const [show,setShow] = useState(false)
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-          
-          <div className="bg-primary/5 min-h-screen pt-40">
-              <Navbar2/>
-        <div className=''>
+      <div className="bg-primary/5 min-h-screen pt-40">
+        <Navbar2 />
+        <div className="">
           <form
             action=""
             className="bg-white w-4/5  lg:w-1/2 mx-auto  text-primary p-10 "
@@ -200,37 +199,59 @@ const [show,setShow] = useState(false)
           </form>
         </div>
 
-              <footer className='bg-white mt-40 h-40 grid place-items-center'>
-                  
-                  <section className=' flex justify-between w-[95%] '>
-                      
-          <div className='text-[.8rem] flex gap-3 text-primary'>
-            <Image
-              src="/images/quidax_logo.svg"
-              width={80}
-              height={100}
-              alt=""
-            />
-            <p>©2023 Quidax. All Rights Reserved.</p>
-                      </div>
-                      
-                      <ul className='flex gap-3 text-[.8rem] '>
-                          <li><Link href=''>Blog</Link></li>
-                          <li><Link href=''>Api</Link></li>
-                          <li><Link href=''>System Status</Link></li>
-                          <li><Link href=''>Privacy Policy</Link></li>
-                          <li><Link href=''>Terms of Use</Link></li>
-                          <li><Link href=''>FAQ</Link></li>
-                          <li><Link href=''>Support</Link></li>
-                      </ul>
-                      <ul className='flex text-primary items-center gap-5'>
-                          <li><BsFacebook  size={24}/></li>
-                          <li><BsTwitter  size={24}/></li>
-                          <li><BsInstagram  size={24}/></li>
-                          <li><FaTelegramPlane  size={24}/></li>
-                          <li><BsYoutube  size={24}/></li>
-                      </ul>
-                  </section>
+        <footer className="bg-white mt-40 h-40 grid place-items-center max-sm:flex-col py-5">
+          <section className=" flex justify-between w-[95%] max-lg:flex-wrap max-lg:gap-3 max-sm:flex-col ">
+            <div className="text-[.8rem] flex gap-3 text-primary max-lg:w-full max-sm:flex-col max-sm:items-center ">
+              <Image
+                src="/images/quidax_logo.svg"
+                width={80}
+                height={100}
+                alt=""
+              />
+              <p>©2023 Quidax. All Rights Reserved.</p>
+            </div>
+
+            <ul className="flex gap-3 text-[.8rem] max-lg:w-full max-sm:flex-col max-sm:items-center">
+              <li>
+                <Link href="">Blog</Link>
+              </li>
+              <li>
+                <Link href="">Api</Link>
+              </li>
+              <li>
+                <Link href="">System Status</Link>
+              </li>
+              <li>
+                <Link href="">Privacy Policy</Link>
+              </li>
+              <li>
+                <Link href="">Terms of Use</Link>
+              </li>
+              <li>
+                <Link href="">FAQ</Link>
+              </li>
+              <li>
+                <Link href="">Support</Link>
+              </li>
+            </ul>
+            <ul className="flex text-primary items-center gap-5 max-sm:flex-col">
+              <li>
+                <BsFacebook size={24} />
+              </li>
+              <li>
+                <BsTwitter size={24} />
+              </li>
+              <li>
+                <BsInstagram size={24} />
+              </li>
+              <li>
+                <FaTelegramPlane size={24} />
+              </li>
+              <li>
+                <BsYoutube size={24} />
+              </li>
+            </ul>
+          </section>
         </footer>
       </div>
     </>
