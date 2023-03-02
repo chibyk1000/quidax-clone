@@ -191,9 +191,9 @@ const Signup = ({ data }: PageProps) => {
 
             <p className="mt-5 text-[.8rem]">
               Already have an account?{" "}
-              <a href="" className="text-secondary font-bold ">
+              <Link href="/signin" className="text-secondary font-bold ">
                 Sign In
-              </a>{" "}
+              </Link>{" "}
             </p>
           </form>
         </div>

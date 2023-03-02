@@ -36,7 +36,7 @@ const Navbar2 = () => {
           </Link>
         </li>
         <li>
-          <Link href="/signp" className=" rounded py-3  border px-4">
+          <Link href="/signup" className=" rounded py-3 z-10 border px-4">
             Create Account
           </Link>
         </li>

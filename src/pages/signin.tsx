@@ -69,15 +69,15 @@ const Login = () => {
             Create Accounts
           </button>
           <div className="flex justify-between mt-5 items-center">
-            <Link href="/reset-password" className="text-secondary font-bold ">
+            <Link href="/reset_password" className="text-secondary font-bold ">
               Forgot Password
             </Link>
 
             <p className=" text-[.8rem]">
               Not Signed Up yet?{" "}
-              <a href="" className="text-secondary font-bold ">
+              <Link href="/signup" className="text-secondary font-bold ">
                 Create Account
-              </a>{" "}
+              </Link>{" "}
             </p>
           </div>
         </form>
