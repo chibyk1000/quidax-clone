@@ -37,7 +37,7 @@ const Navbar = () => {
         </ul>
 
         <div className="flex max-lg:flex-col font-semibold lg:w-[35%] gap-5 max-lg:justify-between lg:items-center">
-          <Link href="" className="   ">
+          <Link href="/signin" className="   ">
             Sign In
           </Link>
           <Link

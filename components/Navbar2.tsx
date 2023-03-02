@@ -31,12 +31,12 @@ const Navbar2 = () => {
           </Link>
         </li>
         <li>
-          <Link href="" className="hover:bg-primary-light  rounded py-4 px-2">
+          <Link href="/signin" className="hover:bg-primary-light  rounded py-4 px-2">
             Sign In
           </Link>
         </li>
         <li>
-          <Link href="" className=" rounded py-3  border px-4">
+          <Link href="/signp" className=" rounded py-3  border px-4">
             Create Account
           </Link>
         </li>
